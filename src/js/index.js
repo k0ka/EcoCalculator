@@ -12,6 +12,8 @@ ReactDOM.render(
         <App config={Config[0]}/>
         <Navbar bg="primary" variant="dark" fixed="bottom">
             <Nav className="justify-content-end ml-auto">
+                <Nav.Link href="https://github.com/k0ka/EcoCalculator/issues">Report a bug</Nav.Link>
+                <Nav.Link href="https://github.com/k0ka/EcoCalculator">View the source</Nav.Link>
                 <Nav.Link href="https://github.com/k0ka">by Koka</Nav.Link>
             </Nav>
         </Navbar>
