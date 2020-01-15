@@ -321,8 +321,12 @@ export default class App extends React.Component {
     }
 
     render(){
+        let containerStyle = {
+            'margin-bottom': '65px'
+        };
+
         return(
-            <Container>
+            <Container style={containerStyle}>
                 <Row>
                     <Col xs="auto">
                         <h1>Eco production calculator for ver {this.props.config.Version}</h1>
