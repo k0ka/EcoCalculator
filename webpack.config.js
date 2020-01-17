@@ -21,6 +21,14 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
+            {
+                test: /\.json$/,
+                loader: 'file-loader',
+                type: 'javascript/auto',
+                options: {
+                    name: '[name].[ext]?[contenthash]',
+                },
+            }
         ]
     },
     plugins: [
@@ -29,16 +37,5 @@ module.exports = {
             inject: true
         }),
         new HtmlWebpackRootPlugin(),
-        new CopyWebpackPlugin([
-            {
-                from: 'src/js/config.js',
-                to: 'config.js'
-            }
-        ]),
-        new HtmlWebpackTagsPlugin({
-            tags: ['config.js'],
-            useHash: true,
-            append: false
-        }),
     ]
 };
