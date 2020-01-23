@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import AddRecipe from './add-recipe';
 import Result from './result';
 import Row from 'react-bootstrap/Row';
@@ -29,8 +29,8 @@ export default class Results extends React.Component {
             });
 
         return (
-            <div>
-                <Row className="m-1 mb-3">
+            <Fragment>
+                <Row className="m-1 mb-3 justify-content-center">
                     <AddRecipe
                         recipes={this.props.restRecipes}
                         localization={localization}
@@ -45,7 +45,7 @@ export default class Results extends React.Component {
                         localization={localization}
                         onRemoveRecipe={this.handleRemoveRecipe}/>
                 )}
-            </div>
+            </Fragment>
         )
     }
 }

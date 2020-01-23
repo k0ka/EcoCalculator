@@ -1,5 +1,4 @@
-import React from 'react';
-import AddRecipe from './add-recipe';
+import React, {Fragment} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -23,7 +22,7 @@ export default class Result extends React.Component {
             });
 
         return (
-            <div>
+            <Fragment>
                 <Row className="my-1" key={result}>
                     <Col xs="7">
                         <label htmlFor={result}>
@@ -64,7 +63,7 @@ export default class Result extends React.Component {
                         </Col>
                     </Row>
                 )}
-            </div>
+            </Fragment>
         )
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -19,7 +19,7 @@ export default class Ingredients extends React.Component {
             });
 
         return (
-            <div>
+            <Fragment>
             {ingredientsSorted.map((value) =>
                 <Row className="my-1" key={value}>
                     <Col xs="8">
@@ -37,7 +37,7 @@ export default class Ingredients extends React.Component {
                     </Col>
                 </Row>
             )}
-            </div>
+            </Fragment>
         )
     }
 }

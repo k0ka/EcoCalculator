@@ -16,13 +16,11 @@ export default class Language extends React.Component {
 
     render() {
         return (
-            <div>
-                <select className="custom-select" value={this.props.value} onChange={this.handleChange}>
-                    {this.props.languages.map((value) =>
-                        <option key={value} value={value}>{value}</option>
-                    )}
-                </select>
-            </div>
+            <select className="custom-select" value={this.props.value} onChange={this.handleChange}>
+                {this.props.languages.map((value) =>
+                    <option key={value} value={value}>{value}</option>
+                )}
+            </select>
         );
     }
 }

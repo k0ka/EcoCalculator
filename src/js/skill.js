@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -44,7 +44,7 @@ export default class Skill extends React.Component {
         const talentName = skillName.substring(0, skillName.length - 5)  + "LavishWorkspaceTalentGroup";
 
         return (
-            <div>
+            <Fragment>
                 <Row className="my-1">
                     <Form.Label column xs={8} htmlFor={skillName}>
                         {this.props.localization[skillName]}
@@ -76,7 +76,7 @@ export default class Skill extends React.Component {
                             onChange={this.handleChangeLavish} />
                     </Form.Group>
                 }
-            </div>
+            </Fragment>
         )
     }
 }

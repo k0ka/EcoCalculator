@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Ingredients from './ingredients';
 import Results from './results';
 import Skills from './skills';
@@ -320,7 +320,7 @@ export default class Calculator extends React.Component {
 
     render(){
         return(
-            <div>
+            <Fragment>
                 <Row>
                     <Col xs="auto">
                         <h1>Eco production calculator for ver {this.props.config.Version}</h1>
@@ -364,7 +364,7 @@ export default class Calculator extends React.Component {
                         />
                     </Col>
                 </Row>
-            </div>
+            </Fragment>
         )
     }
 }

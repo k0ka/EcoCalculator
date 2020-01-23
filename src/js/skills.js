@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import AddSkill from './add-skill';
 import Skill from './skill';
 import Row from 'react-bootstrap/Row';
@@ -34,8 +34,8 @@ export default class Skills extends React.Component {
             });
 
         return (
-            <div>
-                <Row className="m-1 mb-3">
+            <Fragment>
+                <Row className="m-1 mb-3 justify-content-center">
                     <AddSkill
                         skills={this.props.allSkills}
                         localization={this.props.localization}
@@ -53,7 +53,7 @@ export default class Skills extends React.Component {
 
                     />
                 )}
-            </div>
+            </Fragment>
         )
     }
 }

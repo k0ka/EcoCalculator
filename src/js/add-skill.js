@@ -1,7 +1,5 @@
 import React from 'react';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import {Typeahead} from 'react-bootstrap-typeahead';
 
 
@@ -11,27 +9,13 @@ import {Typeahead} from 'react-bootstrap-typeahead';
 export default class AddSkill extends React.Component {
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-
-        this.state = {
-            value: null
-        };
-    }
-
-    handleSubmit(e){
-        e.preventDefault();
-        if(this.state.value == null)
-            return;
-
-        this.props.onAddSkill(this.state.value);
-        this.refs.typeahead.getInstance().clear()
+        this.typeahead = React.createRef();
     }
 
     handleChange(selected){
-        this.setState({
-            value: selected[0].id
-        });
+        this.props.onAddSkill(selected[0].id);
+        this.typeahead.current.clear();
     }
 
     render() {
@@ -45,20 +29,15 @@ export default class AddSkill extends React.Component {
             });
 
         return (
-            <Form inline={true} onSubmit={this.handleSubmit}>
-                <Col xs={9}>
-                    <Typeahead
-                        id="add-skill"
-                        ref="typeahead"
-                        options={options}
-                        onChange={this.handleChange}
-                        placeholder="Choose a skill..."
-                    />
-                </Col>
-                <Col xs={3}>
-                    <Button type="submit" variant="primary">Add</Button>
-                </Col>
-            </Form>
+            <Col>
+                <Typeahead
+                    id="add-skill"
+                    ref={this.typeahead}
+                    options={options}
+                    onChange={this.handleChange}
+                    placeholder="Choose a skill..."
+                />
+            </Col>
         );
     }
 }
