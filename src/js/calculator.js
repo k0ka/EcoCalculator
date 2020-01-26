@@ -6,6 +6,8 @@ import Language from './language';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Map, Set } from 'immutable';
+import ExportDialog from "./export-dialog";
+import ImportDialog from "./import-dialog";
 
 /**
  * Main calculator
@@ -18,6 +20,8 @@ export default class Calculator extends React.Component {
         this.handleAddSkill = this.handleAddSkill.bind(this);
         this.handleRemoveSkill = this.handleRemoveSkill.bind(this);
         this.handleChangeSkill = this.handleChangeSkill.bind(this);
+
+        this.handleImport = this.handleImport.bind(this);
 
         this.handlePriceChanged = this.handlePriceChanged.bind(this);
 
@@ -43,6 +47,7 @@ export default class Calculator extends React.Component {
             languages: languages,
             language: languages[0],
             localization: this.props.config.Localization[languages[0]],
+            exportData: Map(),
         }
     }
 
@@ -75,6 +80,7 @@ export default class Calculator extends React.Component {
 
         this.setState(this.updateRecipes);
         this.setState(this.updatePrices);
+        this.setState(Calculator.updateExportData);
     }
 
     /**
@@ -101,6 +107,7 @@ export default class Calculator extends React.Component {
         });
         this.setState(this.updateRecipes);
         this.setState(this.updatePrices);
+        this.setState(Calculator.updateExportData);
     }
 
     /**
@@ -119,6 +126,7 @@ export default class Calculator extends React.Component {
         });
         this.setState(this.updateRecipes);
         this.setState(this.updatePrices);
+        this.setState(Calculator.updateExportData);
     }
 
 
@@ -144,6 +152,42 @@ export default class Calculator extends React.Component {
         }
         this.setState(this.updateRecipes);
         this.setState(this.updatePrices);
+        this.setState(Calculator.updateExportData);
+    }
+
+    /**
+     * Updates export data
+     */
+    static updateExportData(state, props){
+        return {
+            'exportData': {
+                'skills': state.skills,
+                'ingredients': state.ingredients,
+                'recipes': state.selectedRecipes.map(value => value.keySeq()).valueSeq().flatten()
+            }
+        };
+    }
+
+    /**
+     * Imports data from json
+     */
+    handleImport(dataStr){
+        let data = JSON.parse(dataStr);
+        this.setState((state, props) => {
+            let recipes = Map();
+            data['recipes'].forEach((recipeName) => {
+                recipes = recipes.update(props.config.Recipes[recipeName].result, Map(), recipeMap => recipeMap.set(recipeName, 0));
+            });
+
+            return {
+                skills: Map(data['skills']).map((value) => Map(value)),
+                ingredients: data['ingredients'],
+                selectedRecipes: recipes
+            };
+        });
+        this.setState(this.updateRecipes);
+        this.setState(this.updatePrices);
+        this.setState(Calculator.updateExportData);
     }
 
     /**
@@ -235,6 +279,7 @@ export default class Calculator extends React.Component {
             };
         });
         this.setState(this.updatePrices);
+        this.setState(Calculator.updateExportData);
     }
 
     /**
@@ -255,6 +300,7 @@ export default class Calculator extends React.Component {
             ingredients: newIngredient
         });
         this.setState(this.updatePrices);
+        this.setState(Calculator.updateExportData);
     }
 
     updatePrices(state, props){
@@ -364,6 +410,16 @@ export default class Calculator extends React.Component {
                         />
                     </Col>
                 </Row>
+                <ExportDialog
+                    data={this.state.exportData}
+                    onClose={this.props.onExportClose}
+                    show={this.props.exportOpened}
+                />
+                <ImportDialog
+                    onClose={this.props.onImportClose}
+                    onImport={this.handleImport}
+                    show={this.props.importOpened}
+                />
             </Fragment>
         )
     }

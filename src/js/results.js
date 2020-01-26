@@ -9,16 +9,6 @@ import Row from 'react-bootstrap/Row';
 export default class Results extends React.Component {
     constructor(props) {
         super(props);
-        this.handleAddRecipe = this.handleAddRecipe.bind(this);
-        this.handleRemoveRecipe = this.handleRemoveRecipe.bind(this);
-    }
-
-    handleRemoveRecipe(value){
-        this.props.onRemoveRecipe(value);
-    }
-
-    handleAddRecipe(skill) {
-        this.props.onAddRecipe(skill);
     }
 
     render(){
@@ -34,7 +24,7 @@ export default class Results extends React.Component {
                     <AddRecipe
                         recipes={this.props.restRecipes}
                         localization={localization}
-                        onAddRecipe={this.handleAddRecipe}/>
+                        onAddRecipe={this.props.onAddRecipe}/>
                 </Row>
 
                 {sortedResults.map(([result, recipes]) =>
@@ -43,7 +33,7 @@ export default class Results extends React.Component {
                         result={result}
                         recipes={recipes}
                         localization={localization}
-                        onRemoveRecipe={this.handleRemoveRecipe}/>
+                        onRemoveRecipe={this.props.onRemoveRecipe}/>
                 )}
             </Fragment>
         )

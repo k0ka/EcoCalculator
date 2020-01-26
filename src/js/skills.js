@@ -9,21 +9,6 @@ import Row from 'react-bootstrap/Row';
 export default class Skills extends React.Component {
     constructor(props) {
         super(props);
-        this.handleAddSkill = this.handleAddSkill.bind(this);
-        this.handleRemoveSkill = this.handleRemoveSkill.bind(this);
-        this.handleChangeSkill = this.handleChangeSkill.bind(this);
-    }
-
-    handleAddSkill(skillName) {
-        this.props.onAddSkill(skillName);
-    }
-
-    handleRemoveSkill(skillName) {
-        this.props.onRemoveSkill(skillName);
-    }
-
-    handleChangeSkill(skillName, skillData){
-        this.props.onChangeSkill(skillName, skillData);
     }
 
     render(){
@@ -39,7 +24,7 @@ export default class Skills extends React.Component {
                     <AddSkill
                         skills={this.props.allSkills}
                         localization={this.props.localization}
-                        onAddSkill={this.handleAddSkill} />
+                        onAddSkill={this.props.onAddSkill} />
                 </Row>
 
                 {skillsSorted.map((skillName) =>
@@ -48,9 +33,8 @@ export default class Skills extends React.Component {
                         skillName={skillName}
                         skillData={this.props.skills.get(skillName)}
                         localization={this.props.localization}
-                        onChangeSkill={this.handleChangeSkill}
-                        onRemoveSkill={this.handleRemoveSkill}
-
+                        onChangeSkill={this.props.onChangeSkill}
+                        onRemoveSkill={this.props.onRemoveSkill}
                     />
                 )}
             </Fragment>
