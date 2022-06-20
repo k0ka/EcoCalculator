@@ -1,6 +1,8 @@
+# Obsolete
+
+Use https://eco-calc.com/ instead
+
+
 # EcoCalculator
-Eco game production calculator source
+Eco game production calculator source for version 0.8
 
-# Usage
-
-Go to http://public.identityworks.ru/Eco/Calc/ and use it
